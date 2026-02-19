@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
+import profileImg from "../../assets/profile.avif";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Navbar = () => {
       <Link to='/profile' >
       <div className="nav-right">
         <button className="Profile-section">
-         <img className='profile-img' src="profile.avif"></img>
+         <img className='profile-img' src={profileImg}></img>
         </button>
       </div>
       </Link>

@@ -2,6 +2,7 @@ import { Component } from "react";
 import Navbar from "../Navbar";
 import "./index.css";
 
+
 class Profile extends Component {
   getUser = () => {
     try {
