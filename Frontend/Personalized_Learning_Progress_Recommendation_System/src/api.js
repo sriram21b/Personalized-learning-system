@@ -1,2 +1,2 @@
-const BASE_URL = "http://localhost:5001/api";
+const BASE_URL = "https://quiz-backend-fpns.onrender.com/api";
 export default BASE_URL;
