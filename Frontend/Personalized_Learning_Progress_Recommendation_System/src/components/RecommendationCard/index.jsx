@@ -1,7 +1,7 @@
 import { Component } from "react";
 import BASE_URL from "../../api";
 import "./index.css"
-
+import Navbar from "../Navbar";
 
 class RecommendationCard extends Component {
   state = {
@@ -22,6 +22,8 @@ class RecommendationCard extends Component {
     const { recommendation } = this.state;
 
     return (
+      <>
+      <Navbar/>
       <div className="recommend-container">
         <h2 className="recommend-title">Recommendation</h2>
         <button className="recommend-btn" onClick={this.fetchRecommendation}>
@@ -32,6 +34,7 @@ class RecommendationCard extends Component {
           <pre>{JSON.stringify(recommendation, null, 2)}</pre>
         )}
       </div>
+      </>
     );
   }
 }
