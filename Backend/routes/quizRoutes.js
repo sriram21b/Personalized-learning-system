@@ -4,6 +4,24 @@ const db = require("../db");
 
 // AI helper functions
 
+const questionTopicMap = {
+  1: { topic: "Data Structures", video: "https://youtu.be/B31LgI4Y4DQ" },
+  2: { topic: "Algorithms", video: "https://youtu.be/P3YID7liBug" },
+  3: { topic: "React", video: "https://youtu.be/bMknfKXIFA8" },
+  4: { topic: "JavaScript", video: "https://youtu.be/W6NZfCO5SIk" },
+  5: { topic: "HTML", video: "https://youtu.be/UB1O30fR-EE" },
+  6: { topic: "JavaScript", video: "https://youtu.be/W6NZfCO5SIk" },
+  7: { topic: "CSS", video: "https://youtu.be/yfoY53QXEnI" },
+  8: { topic: "JavaScript Arrays", video: "https://youtu.be/R8rmfD9Y5-c" },
+  9: { topic: "React", video: "https://youtu.be/bMknfKXIFA8" },
+  10: { topic: "HTTP", video: "https://youtu.be/iYM2zFP3Zn0" },
+  11: { topic: "React Hooks", video: "https://youtu.be/TNhaISOUy6Q" },
+  12: { topic: "SQL", video: "https://youtu.be/HXV3zeQKqGY" },
+  13: { topic: "JavaScript", video: "https://youtu.be/W6NZfCO5SIk" },
+  14: { topic: "CSS Grid", video: "https://youtu.be/jV8B24rSN5o" },
+  15: { topic: "HTTP", video: "https://youtu.be/iYM2zFP3Zn0" },
+};
+
 function getLevel(accuracy) {
   if (accuracy < 0.4) return "Beginner";
   if (accuracy < 0.75) return "Intermediate";
@@ -20,7 +38,7 @@ function adjustDifficulty(accuracy) {
 
 router.post("/quiz/submit", async (req, res) => {
   try {
-    const { user_id, topic_id, score, total_questions } = req.body;
+    const { user_id, topic_id, score, total_questions, wrong_questions } = req.body;
 
   
     if (
@@ -55,9 +73,18 @@ router.post("/quiz/submit", async (req, res) => {
         accuracy,
       ]);
 
-    // simple recommendation logic
-    const recommendedTopic =
-      accuracy < 0.5 ? "Basics Revision" : "Advanced Practice";
+    // smart recommendation based on wrong answers
+    let recommendedTopic = accuracy < 0.5 ? "Basics Revision" : "Advanced Practice";
+    let recommendedVideo = "";
+
+    if (wrong_questions && wrong_questions.length > 0) {
+      const firstWrong = wrong_questions[0];
+      const rec = questionTopicMap[firstWrong];
+      if (rec) {
+        recommendedTopic = rec.topic;
+        recommendedVideo = rec.video;
+      }
+    }
 
     const insertRec = `
       INSERT INTO recommendations
@@ -74,6 +101,7 @@ router.post("/quiz/submit", async (req, res) => {
       accuracy,
       level,
       recommended_topic: recommendedTopic,
+      recommended_video: recommendedVideo,
       difficulty_adjustment: difficulty,
     });
   } catch (error) {
@@ -90,14 +118,14 @@ router.get("/progress/:userId", async(req, res) => {
         const userProgressQuery = `
         SELECT
         COUNT(*) AS total_attempts,
-        AVG(accuracy) AS avg_accuracy
+        AVG(accuracy) AS average_accuracy
         FROM quiz_attempts
         WHERE user_id = ?
         `;
         const [rows] = await db.promise().query(userProgressQuery, [userId])
 
         const totalAttempts = rows[0].total_attempts || 0;
-        const avgAccuracy = rows[0].avg_accuracy || 0;
+        const avgAccuracy = rows[0].average_accuracy || 0;
         let level = "Beginner";
 
 if (avgAccuracy >= 0.75) {
@@ -106,9 +134,12 @@ if (avgAccuracy >= 0.75) {
   level = "Intermediate";
 }
 
-res.json({user_id: 
-    userId, total_attempts: totalAttempts, avg_accuracy: avgAccuracy, current_level: level
-})
+res.json({
+  user_id: userId,
+  total_attempts: totalAttempts,
+  average_accuracy: avgAccuracy,
+  level: level
+});
     }
     catch(error){
         console.log(error)
@@ -117,7 +148,7 @@ res.json({user_id:
     
 })
 
-router.get("/recommendation/:userId", async (req, res) => {
+router.get("/recommendations/:userId", async (req, res) => {
   try {
 const { userId } = req.params;
 const recommendationQuery = `
@@ -130,12 +161,22 @@ const recommendationQuery = `
 
 const [rows] = await db.promise().query(recommendationQuery, [userId]);
 if (rows.length === 0) {
-  return res.json({ message: "No recommendations yet" });
+  return res.json({
+    user_id: userId,
+    recommended_topic: "No recommendation yet",
+    recommended_video: "",
+  });
 }
+
+const topic = rows[0].recommended_topic;
+const video = Object.values(questionTopicMap).find(
+  (item) => item.topic === topic
+)?.video || "";
 
 res.json({
   user_id: userId,
-  recommended_topic: rows[0].recommended_topic,
+  recommended_topic: topic,
+  recommended_video: video,
   difficulty_adjustment: rows[0].difficulty_adjustment,
 });
 
