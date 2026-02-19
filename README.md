@@ -1,200 +1,163 @@
-# Personalized Learning Progress Recommendation System
+Personalized Learning Progress & Recommendation System
 
-An AI-assisted full-stack web application that analyzes student quiz performance and generates personalized learning recommendations to improve learning outcomes.
+A full-stack intelligent quiz platform that tracks user performance, analyzes accuracy, and recommends personalized learning content based on weak areas.
 
-🔗 **Live Demo (Frontend):** https://personalized-learning-system.vercel.app/ 
-🔗 **Backend API:** https://quiz-backend-fpns.onrender.com
+Built with a clean professional UI and real-time analytics.
 
----
+⸻
 
-## Project Overview
+Live Demo
+	•	Frontend: https://personalized-learning-system.vercel.app/
+	•	Backend API: https://quiz-backend-fpns.onrender.com
 
-This system allows students to attempt quizzes, tracks their performance, calculates progress metrics, and intelligently recommends the next learning topic based on accuracy and performance trends.
+⸻
 
-The goal is to simulate a **data-driven personalized learning platform** similar to modern ed-tech systems.
+Key Features
 
----
+Authentication
+	•	User Signup & Login
+	•	Secure password hashing using bcrypt
+	•	Persistent login with localStorage
+	•	Protected routes
 
-## Key Features
+Smart Quiz Engine
+	•	Mini quiz with multiple questions
+	•	Automatic score calculation
+	•	Accuracy computation
+	•	Multiple attempts tracking
 
-- Mini quiz system for students  
-- Automatic progress calculation  
-- AI-based learning recommendations  
-- Performance level classification (Beginner / Intermediate / Advanced)  
-- Difficulty adjustment suggestions  
-- Fully deployed full-stack application  
-- RESTful API architecture  
-- MySQL relational database design  
+Progress Dashboard
+	•	Real-time performance tracking
+	•	Bar chart visualization using Recharts
+	•	Attempts vs Accuracy analytics
+	•	Responsive and mobile-friendly
 
----
+Intelligent Recommendations
+	•	Weak-area detection
+	•	Topic-based recommendations
+	•	YouTube learning video suggestions
+	•	Personalized learning path
 
-## AI / Recommendation Logic
-
-The system uses a **rule-based heuristic model** to simulate intelligent recommendations:
-
-- Calculates quiz accuracy  
-- Classifies student level:
-  - Beginner (< 40%)  
-  - Intermediate (40% – 75%)  
-  - Advanced (> 75%)  
-- Recommends next topic difficulty  
-- Suggests difficulty adjustment  
-
-This demonstrates applied AI logic suitable for adaptive learning systems.
-
-
-
-## Tech Stack
-
-### Frontend
-- React (Vite)  
-- JavaScript (ES6)  
-- CSS3  
-
-### Backend
-- Node.js  
-- Express.js  
-- MySQL2  
-- dotenv  
-- CORS  
-
-### Database
-- MySQL (Railway)
-
-### Deployment
-- Frontend → Vercel  
-- Backend → Render  
-- Database → Railway  
+Professional UI
+	•	Clean modern layout
+	•	Responsive mobile design
+	•	Top navigation bar
+	•	Smooth user experience
 
 
-## Database Schema
+Tech Stack
 
-**Tables:**
+Frontend
+	•	React (Class Components)
+	•	Vite
+	•	Recharts
+	•	CSS3
 
-- users  
-- topics  
-- quiz_attempts  
+Backend
+	•	Node.js
+	•	Express.js
+	•	MySQL
+	•	bcrypt
 
-**Relationships:**
+Deployment
+	•	Frontend: Vercel
+	•	Backend: Render
+	•	Database: Railway MySQL
 
-- Users → Quiz Attempts (1:N)  
-- Topics → Quiz Attempts (1:N)  
+Project Structure
 
+FullStack_project/
+│
+├── Backend/
+│   ├── routes/
+│   ├── config/
+│   ├── server.js
+│   └── setupTables.js
+│
+└── Frontend/
+    └── Personalized_Learning_Progress_Recommendation_System/
+        ├── src/
+        │   ├── components/
+        │   ├── api.js
+        │   └── App.jsx
 
-## API Endpoints
+Local Setup
 
-### Submit Quiz
-POST /api/quiz/submit
+Clone the repository
 
-**Request Body**
-```json
-{
-  "user_id": 1,
-  "topic_id": 1,
-  "score": 3,
-  "total_questions": 5
-}
-```
-
----
-
-### Get User Progress
-GET /api/progress/:userId
-
----
-
-### Get Recommendation
-GET /api/recommendation/:userId
-
----
-
-## Screenshots
-
-### Mini Quiz Interface
-![Mini Quiz](./screenshots/quiz.png)
-
----
-
-### Progress Dashboard
-![Progress Dashboard](./screenshots/progress.png)
-
----
-
-### Recommendation Result
-![Recommendation](./screenshots/recommendation.png)
-
----
-
-## Local Setup
-
-### Clone the repository
-
-```bash
-git clone <your-repo-url>
+git clone https://github.com/sriram21b/Personalized-learning-system
 cd FullStack_project
-```
 
----
+Backend Setup
 
-### Backend Setup
-
-```bash
 cd Backend
 npm install
 npm run dev
-```
 
-Create a `.env` file inside **Backend/** with:
+Create .env:
 
-```
 DB_HOST=your_host
 DB_USER=your_user
 DB_PASSWORD=your_password
-DB_NAME=your_db
+DB_NAME=your_database
 DB_PORT=your_port
 PORT=5001
-```
 
----
+Frontend Setup
 
-### Frontend Setup
-
-Open a new terminal:
-
-```bash
 cd Frontend/Personalized_Learning_Progress_Recommendation_System
 npm install
 npm run dev
-```
 
-Frontend runs on:
+Create .env:
 
-```
-http://localhost:5173
-```
+VITE_API_BASE_URL=http://localhost:5001/api
 
-Backend runs on:
+Production Environment
 
-```
-http://localhost:5001
-```
+.env.production
 
----
+VITE_API_BASE_URL=https://quiz-backend-fpns.onrender.com/api
 
-## Future Improvements
+Screenshots
 
-- User authentication (JWT)  
-- Progress charts & analytics  
-- Real ML model integration  
-- Dynamic quiz question bank  
-- Instructor dashboard  
-- Mobile responsive enhancements  
+Login Page
+
+Progress Dashboard
+
+Recommendation Section
+
+API Endpoints
+
+Auth
+	•	POST /api/auth/signup
+	•	POST /api/auth/login
+
+Quiz
+	•	POST /api/quiz/submit
+
+Progress
+	•	GET /api/quiz/progress/:userId
+
+Recommendations
+	•	GET /api/recommendations/:userId
 
 
-## Author
+Future Improvements
+	•	JWT authentication
+	•	Attempt history chart
+	•	Difficulty-adaptive quizzes
+	•	Leaderboard
+	•	Admin dashboard
+	•	Question bank from database
 
-**Sriram**  
+Author
+
+Sriram
 Full Stack Developer
 
+⸻
 
-If you found this project helpful, consider giving it a star!
+If you like this project
+
+Give it a Star on GitHub — it motivates me to build more!
