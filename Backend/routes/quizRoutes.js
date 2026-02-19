@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
-// 🧠 AI helper functions
+// AI helper functions
 
 function getLevel(accuracy) {
   if (accuracy < 0.4) return "Beginner";
@@ -16,13 +16,13 @@ function adjustDifficulty(accuracy) {
   return "Increase";
 }
 
-// 🚀 MAIN API — submit quiz
+// MAIN API — submit quiz
 
 router.post("/quiz/submit", async (req, res) => {
   try {
     const { user_id, topic_id, score, total_questions } = req.body;
 
-    // ✅ validation
+  
     if (
       user_id === undefined ||
       topic_id === undefined ||
@@ -38,7 +38,7 @@ router.post("/quiz/submit", async (req, res) => {
     const level = getLevel(accuracy);
     const difficulty = adjustDifficulty(accuracy);
 
-    // ✅ insert quiz attempt
+    // insert quiz attempt
     const insertQuiz = `
       INSERT INTO quiz_attempts
       (user_id, topic_id, score, total_questions, accuracy)
@@ -55,7 +55,7 @@ router.post("/quiz/submit", async (req, res) => {
         accuracy,
       ]);
 
-    // ✅ simple recommendation logic
+    // simple recommendation logic
     const recommendedTopic =
       accuracy < 0.5 ? "Basics Revision" : "Advanced Practice";
 

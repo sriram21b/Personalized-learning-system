@@ -14,7 +14,7 @@ const seed = async () => {
       VALUES ('Arrays Basics', 'Easy')
     `);
 
-    console.log("✅ Seed data inserted");
+    console.log("Seed data inserted");
     process.exit();
   } catch (err) {
     console.error(err);

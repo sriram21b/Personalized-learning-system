@@ -52,7 +52,7 @@ const createTables = async () => {
     await db.promise().query(query);
   }
 
-  console.log("✅ All tables created successfully");
+  console.log("All tables created successfully");
   process.exit();
 };
 
