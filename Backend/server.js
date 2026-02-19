@@ -4,15 +4,21 @@ require("dotenv").config();
 const db = require("./db");
 const quizRoutes = require("./routes/quizRoutes");
 
+const authRoutes = require("./routes/authRoutes");
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
+app.use("/api/auth", authRoutes);
+
 app.get("/", (req, res) => {
     console.log("Root route hit")
   res.send("Backend running 🚀");
 });
+
+
 
 app.use("/api", quizRoutes);
 
