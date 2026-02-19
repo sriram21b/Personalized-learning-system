@@ -3,6 +3,7 @@ import LoginForm from "./components/LoginForm";
 import QuizForm from "./components/QuizForm";
 import ProgressDashboard from "./components/ProgressDashboard";
 import RecommendationCard from "./components/RecommendationCard";
+import Profile from "./components/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -21,7 +22,12 @@ function App() {
             </ProtectedRoute>
           }
         />
-
+<Route path="/profile" element={
+  <ProtectedRoute>
+  
+  <Profile/>
+  </ProtectedRoute>
+}/>
         <Route
           path="/progress"
           element={

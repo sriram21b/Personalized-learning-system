@@ -21,11 +21,13 @@ const Navbar = () => {
         <Link to="/recommendation" className="nav-link">Recommendation</Link>
       </div>
 
+      <Link to='/profile' >
       <div className="nav-right">
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
+        <button className="Profile-section">
+         <img className='profile-img' src="profile.avif"></img>
         </button>
       </div>
+      </Link>
     </nav>
   );
 };

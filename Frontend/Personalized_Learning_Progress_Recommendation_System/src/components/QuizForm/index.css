@@ -1,4 +1,4 @@
-/* Page wrapper to center both quiz and result */
+
 .quiz-page {
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
   min-height: calc(100vh - 60px);
 }
 
-/* Quiz card */
+
 .quiz-container {
   width: 100%;
   max-width: 760px;
@@ -21,7 +21,7 @@
   font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
-/* Title */
+
 .quiz-title {
   margin-bottom: 20px;
   color: #0f172a;
@@ -30,7 +30,7 @@
   text-align: center;
 }
 
-/* Question card */
+
 .question-card {
   margin-bottom: 18px;
   padding: 16px;
@@ -50,7 +50,7 @@
   font-weight: 500;
 }
 
-/* Options */
+
 .option-label {
   display: block;
   margin-top: 6px;
@@ -63,7 +63,7 @@
   margin-right: 6px;
 }
 
-/* Submit button */
+
 .submit-btn {
   margin-top: 16px;
   padding: 11px 20px;
@@ -80,7 +80,7 @@
   background-color: #1d4ed8;
 }
 
-/* Result card (separate centered card) */
+
 .result-box {
   width: 100%;
   max-width: 760px;
@@ -93,4 +93,22 @@
   font-size: 14px;
   line-height: 1.6;
   font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+.correct-option {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.wrong-option {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.answer-text {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #475569;
+}
+span {
+  color: #16a34a;
 }

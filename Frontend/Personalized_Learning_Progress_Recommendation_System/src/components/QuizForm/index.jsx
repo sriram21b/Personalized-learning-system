@@ -159,7 +159,13 @@ class QuizForm extends Component {
       });
 
       const data = await response.json();
-      this.setState({ result: data });
+      this.setState({
+        result: {
+          ...data,
+          score,
+          total_questions: total,
+        },
+      });
     } catch (error) {
       console.error(error);
       alert("Failed to submit quiz");
@@ -184,19 +190,42 @@ class QuizForm extends Component {
                 <strong>{q.question}</strong>
               </p>
 
-              {q.options.map((opt) => (
-                <label key={opt} className="option-label">
-                  <input
-                    type="radio"
-                    name={`question-${q.id}`}
-                    value={opt}
-                    onChange={(e) =>
-                      this.handleOptionChange(q.id, e.target.value)
-                    }
-                  />{" "}
-                  {opt}
-                </label>
-              ))}
+              {q.options.map((opt) => {
+                const isSelected =
+                  this.state.answers[q.id] === opt;
+                const isCorrect = opt === q.answer;
+                const showResult = result !== null;
+
+                return (
+                  <label
+                    key={opt}
+                    className={`option-label ${
+                      showResult && isCorrect ? "correct-option" : ""
+                    } ${
+                      showResult && isSelected && !isCorrect
+                        ? "wrong-option"
+                        : ""
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name={`question-${q.id}`}
+                      value={opt}
+                      checked={isSelected}
+                      disabled={showResult}
+                      onChange={(e) =>
+                        this.handleOptionChange(q.id, e.target.value)
+                      }
+                    />{" "}
+                    {opt}
+                  </label>
+                );
+              })}
+
+              {result && (
+                <p className="answer-text">
+                  Correct Answer: <span><strong>{q.answer}</strong></span>                </p>
+              )}
             </div>
           ))}
 
@@ -212,6 +241,9 @@ class QuizForm extends Component {
             </p>
             <p>
               <strong>Accuracy:</strong> {result.accuracy}
+            </p>
+            <p>
+              <strong>Score:</strong> {result.score} / {result.total_questions}
             </p>
             <p>
               <strong>Level:</strong> {result.level}
