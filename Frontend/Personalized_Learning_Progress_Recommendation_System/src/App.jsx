@@ -9,10 +9,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* 🔓 Public */}
+        
         <Route path="/login" element={<LoginForm />} />
 
-        {/* 🔒 Protected */}
+        
         <Route
           path="/"
           element={

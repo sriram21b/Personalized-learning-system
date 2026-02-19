@@ -46,10 +46,10 @@ class LoginForm extends Component {
 
       const data = await response.json();
 
-      // ⭐ store user on login success
+      
       if (data.user_id) {
   localStorage.setItem("user", JSON.stringify(data));
-  window.location.href = "/"; // ⭐ redirect to home
+  window.location.href = "/";
 }
 
       this.setState({ message: data.message || data.error });

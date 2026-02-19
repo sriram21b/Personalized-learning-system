@@ -9,13 +9,13 @@ class QuizForm extends Component {
     result: null,
   };
 
-  // 🔐 get logged-in user
+  
   getUserId = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     return user?.user_id;
   };
 
-  // 🧠 quiz questions
+  
   questions = [
     {
       id: 1,
@@ -35,9 +35,81 @@ class QuizForm extends Component {
       options: ["Database", "UI", "Networking", "OS"],
       answer: "UI",
     },
+    {
+      id: 4,
+      question: "Which keyword is used to declare a constant in JavaScript?",
+      options: ["let", "var", "const", "static"],
+      answer: "const",
+    },
+    {
+      id: 5,
+      question: "Which HTML tag is used for the largest heading?",
+      options: ["<h6>", "<heading>", "<h1>", "<head>"],
+      answer: "<h1>",
+    },
+    {
+      id: 6,
+      question: "Which method converts JSON to a JavaScript object?",
+      options: ["JSON.parse()", "JSON.stringify()", "JSON.convert()", "JSON.toObject()"],
+      answer: "JSON.parse()",
+    },
+    {
+      id: 7,
+      question: "Which CSS property controls text size?",
+      options: ["font-style", "text-size", "font-size", "text-style"],
+      answer: "font-size",
+    },
+    {
+      id: 8,
+      question: "Which array method adds an element to the end?",
+      options: ["push()", "pop()", "shift()", "unshift()"],
+      answer: "push()",
+    },
+    {
+      id: 9,
+      question: "Which company developed React?",
+      options: ["Google", "Facebook", "Microsoft", "Amazon"],
+      answer: "Facebook",
+    },
+    {
+      id: 10,
+      question: "Which HTTP status code means 'Not Found'?",
+      options: ["200", "301", "404", "500"],
+      answer: "404",
+    },
+    {
+      id: 11,
+      question: "Which hook is used for side effects in React?",
+      options: ["useState", "useEffect", "useContext", "useMemo"],
+      answer: "useEffect",
+    },
+    {
+      id: 12,
+      question: "Which SQL command is used to retrieve data?",
+      options: ["GET", "SELECT", "FETCH", "OPEN"],
+      answer: "SELECT",
+    },
+    {
+      id: 13,
+      question: "Which JavaScript function converts string to integer?",
+      options: ["parseInt()", "toString()", "Number.toInt()", "int()"],
+      answer: "parseInt()",
+    },
+    {
+      id: 14,
+      question: "Which CSS layout uses rows and columns?",
+      options: ["Flexbox", "Grid", "Float", "Inline"],
+      answer: "Grid",
+    },
+    {
+      id: 15,
+      question: "Which protocol is used to transfer web pages?",
+      options: ["FTP", "SMTP", "HTTP", "TCP"],
+      answer: "HTTP",
+    },
   ];
 
-  // ✅ handle option select
+  
   handleOptionChange = (questionId, value) => {
     this.setState((prev) => ({
       answers: {
@@ -47,7 +119,7 @@ class QuizForm extends Component {
     }));
   };
 
-  // 🚀 submit quiz
+  
   handleSubmit = async () => {
     const { answers } = this.state;
 
@@ -61,10 +133,13 @@ class QuizForm extends Component {
 
     let score = 0;
     const total = this.questions.length;
+    const wrongQuestions = [];
 
     this.questions.forEach((q) => {
       if (answers[q.id] === q.answer) {
         score++;
+      } else {
+        wrongQuestions.push(q.id);
       }
     });
 
@@ -79,6 +154,7 @@ class QuizForm extends Component {
           topic_id: topicId,
           score,
           total_questions: total,
+          wrong_questions: wrongQuestions,
         }),
       });
 
@@ -95,11 +171,12 @@ class QuizForm extends Component {
 
     return (
       <>
-        {/* 🔥 NAVBAR AT TOP */}
+
         <Navbar />
 
-        <div className="quiz-container">
-          <h2 className="quiz-title">Mini Quiz</h2>
+        <div className="quiz-page">
+          <div className="quiz-container">
+          <h2 className="quiz-title">Quiz</h2>
 
           {this.questions.map((q) => (
             <div key={q.id} className="question-card">
@@ -126,28 +203,41 @@ class QuizForm extends Component {
           <button className="submit-btn" onClick={this.handleSubmit}>
             Submit Quiz
           </button>
+        </div>
 
-          {result && (
-            <div className="result-box">
+        {result && (
+          <div className="result-box">
+            <p>
+              <strong>Message:</strong> {result.message}
+            </p>
+            <p>
+              <strong>Accuracy:</strong> {result.accuracy}
+            </p>
+            <p>
+              <strong>Level:</strong> {result.level}
+            </p>
+            <p>
+              <strong>Recommended Topic:</strong>{" "}
+              {result.recommended_topic}
+            </p>
+            <p>
+              <strong>Difficulty Adjustment:</strong>{" "}
+              {result.difficulty_adjustment}
+            </p>
+            {result.recommended_video && (
               <p>
-                <strong>Message:</strong> {result.message}
+                <strong>Recommended Video:</strong>{" "}
+                <a
+                  href={result.recommended_video}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Watch Here
+                </a>
               </p>
-              <p>
-                <strong>Accuracy:</strong> {result.accuracy}
-              </p>
-              <p>
-                <strong>Level:</strong> {result.level}
-              </p>
-              <p>
-                <strong>Recommended Topic:</strong>{" "}
-                {result.recommended_topic}
-              </p>
-              <p>
-                <strong>Difficulty Adjustment:</strong>{" "}
-                {result.difficulty_adjustment}
-              </p>
-            </div>
-          )}
+            )}
+          </div>
+        )}
         </div>
       </>
     );

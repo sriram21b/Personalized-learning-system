@@ -1,57 +1,18 @@
+/* Page wrapper to center both quiz and result */
+.quiz-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 34px;
+  background-color: #f1f5f9;
+  min-height: calc(100vh - 60px);
+}
+
+/* Quiz card */
 .quiz-container {
-  background-color: #ffffff;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  margin-bottom: 24px;
-}
-
-.quiz-title {
-  margin-bottom: 16px;
-  color: black
-}
-
-.question-card {
-  margin-bottom: 18px;
-  padding: 12px;
-  background-color: #f9fafb;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  color: black;
-}
-
-.option-label {
-  display: block;
-  margin-top: 6px;
-  cursor: pointer;
-  color:red;
-}
-
-.submit-btn {
-  margin-top: 12px;
-  padding: 10px 18px;
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.submit-btn:hover {
-  background-color: #1e4fd1;
-}
-
-.result-box {
-  margin-top: 16px;
-  background-color: #111827;
-  color: #00ff9d;
-  padding: 14px;
-  border-radius: 8px;
-}
-.quiz-container {
+  width: 100%;
   max-width: 760px;
-  margin: 40px auto;
   background-color: #ffffff;
   padding: 28px;
   border-radius: 14px;
@@ -60,6 +21,7 @@
   font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
+/* Title */
 .quiz-title {
   margin-bottom: 20px;
   color: #0f172a;
@@ -68,6 +30,7 @@
   text-align: center;
 }
 
+/* Question card */
 .question-card {
   margin-bottom: 18px;
   padding: 16px;
@@ -75,6 +38,11 @@
   border-radius: 10px;
   border: 1px solid #e2e8f0;
   color: #1e293b;
+  transition: border-color 0.2s ease;
+}
+
+.question-card:hover {
+  border-color: #cbd5f5;
 }
 
 .question-card p {
@@ -82,6 +50,7 @@
   font-weight: 500;
 }
 
+/* Options */
 .option-label {
   display: block;
   margin-top: 6px;
@@ -94,6 +63,7 @@
   margin-right: 6px;
 }
 
+/* Submit button */
 .submit-btn {
   margin-top: 16px;
   padding: 11px 20px;
@@ -110,12 +80,17 @@
   background-color: #1d4ed8;
 }
 
+/* Result card (separate centered card) */
 .result-box {
-  margin-top: 18px;
-  background-color: #0f172a;
-  color: #22c55e;
-  padding: 16px;
-  border-radius: 10px;
+  width: 100%;
+  max-width: 760px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  color: #0f172a;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
 }

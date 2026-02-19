@@ -1,34 +1,58 @@
 .recommend-container {
+  max-width: 760px;
+  margin: 40px auto;
   background-color: #ffffff;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  margin-bottom: 24px;
+  padding: 28px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
 .recommend-title {
-  color: #1f2937;
-  margin-bottom: 12px;
+  color: #0f172a;
+  margin-bottom: 18px;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .recommend-btn {
-  padding: 10px 18px;
-  background-color: #7c3aed;
-  color: white;
+  display: block;
+  margin: 0 auto 22px auto;
+  padding: 10px 20px;
+  background-color: #2563eb;
+  color: #ffffff;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+  font-size: 14px;
 }
 
 .recommend-btn:hover {
-  background-color: #6d28d9;
+  background-color: #1d4ed8;
 }
 
-.recommend-result {
-  margin-top: 14px;
-  background-color: #111827;
-  color: #facc15;
-  padding: 12px;
-  border-radius: 8px;
+.recommend-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.recommend-card p {
+  margin: 8px 0;
+}
+
+.recommend-card a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.recommend-card a:hover {
+  text-decoration: underline;
 }
